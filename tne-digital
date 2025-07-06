@@ -511,3 +511,25 @@
     </script>
 </body>
 </html>
+<!-- En el script, cambia esta parte: -->
+<script>
+// Función para recibir datos de Adalo
+function updateTNEData(userData) {
+    document.getElementById('studentName').textContent = userData.name || 'NOMBRE ESTUDIANTE';
+    document.getElementById('studentRut').textContent = userData.rut || '12.345.678-9';
+    document.getElementById('institutionName').textContent = userData.institution || 'Institución Educativa';
+    document.getElementById('careerInfo').textContent = userData.career || 'Carrera/Nivel';
+}
+
+// Obtener datos de la URL (parámetros de Adalo)
+const urlParams = new URLSearchParams(window.location.search);
+const userData = {
+    name: urlParams.get('name') || 'JOSÉ MARTÍNEZ',
+    rut: urlParams.get('rut') || '20.123.456-7',
+    institution: urlParams.get('institution') || 'Universidad de Chile',
+    career: urlParams.get('career') || 'Ingeniería Civil Industrial'
+};
+
+// Actualizar la TNE con los datos
+updateTNEData(userData);
+</script>
