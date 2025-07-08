@@ -13,27 +13,35 @@
             box-sizing: border-box;
         }
 
+        html, body {
+            width: 100%;
+            height: 100%;
+            background: transparent !important;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            min-height: 100vh;
             padding: 20px;
-            overflow: hidden; /* Evita barras de desplazamiento innecesarias */
         }
 
         .container {
             position: relative;
             width: 100%;
-            max-width: 500px; /* Ancho máximo para la tarjeta */
+            max-width: 500px;
+            background: transparent !important;
         }
 
         .bip-card {
             width: 450px;
             height: 280px;
-            background: linear-gradient(135deg, #FF6F00 0%, #F57C00 30%, #FFB300 100%); /* Tonos naranjas/amarillos de Bip! */
+            background: linear-gradient(135deg, #FF6F00 0%, #F57C00 30%, #FFB300 100%);
             border-radius: 24px;
             position: relative;
             overflow: hidden;
@@ -74,7 +82,7 @@
             border-radius: 24px;
         }
 
-        /* Animated background pattern (similar to TNE, but with subtle variations) */
+        /* Animated background pattern */
         .pattern-bg {
             position: absolute;
             top: 0;
@@ -117,7 +125,7 @@
         .bip-logo {
             font-size: 28px;
             font-weight: 900;
-            color: #FF6F00; /* Color Bip! */
+            color: #FF6F00;
             letter-spacing: -1px;
             text-shadow: 0 1px 2px rgba(0,0,0,0.1);
             background: linear-gradient(135deg, #FF6F00 0%, #F57C00 100%);
@@ -144,7 +152,7 @@
             width: 24px;
             height: 24px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #0288D1 0%, #03A9F4 100%); /* Azul para NFC */
+            background: linear-gradient(135deg, #0288D1 0%, #03A9F4 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -164,7 +172,7 @@
         .chip {
             width: 32px;
             height: 26px;
-            background: linear-gradient(135deg, #e0e0e0 0%, #bdbdbd 50%, #9e9e9e 100%); /* Gris para chip de tarjeta bancaria */
+            background: linear-gradient(135deg, #e0e0e0 0%, #bdbdbd 50%, #9e9e9e 100%);
             border-radius: 6px;
             position: relative;
             box-shadow: 
@@ -213,7 +221,7 @@
         }
 
         .current-balance {
-            font-size: 60px; /* Tamaño grande para el saldo */
+            font-size: 60px;
             font-weight: 900;
             letter-spacing: -2px;
             line-height: 1;
@@ -251,7 +259,7 @@
             50% { left: 100%; }
         }
 
-        /* Footer for card number (optional but adds realism) */
+        /* Footer for card number */
         .card-number {
             position: absolute;
             bottom: 20px;
@@ -281,7 +289,6 @@
             }
         }
 
-        /* Rotate effect for horizontal view */
         @media (orientation: landscape) and (max-height: 500px) {
             .bip-card {
                 width: 500px;
@@ -319,17 +326,17 @@
             
             <div class="bip-content">
                 <div class="balance-label">Saldo Disponible</div>
-                <div class="current-balance">$20.000</div> 
-                <div class="last-update">Actualizado: Julio 2025</div> </div>
+                <div class="current-balance">$20.000</div>
+                <div class="last-update">Actualizado: Julio 2025</div>
+            </div>
 
-            <div class="card-number">**** **** **** 1234</div> </div>
+            <div class="card-number">**** **** **** 1234</div>
+        </div>
     </div>
 
     <script>
-        // 🎨 EFECTOS INTERACTIVOS (Similar a tu TNE, para consistencia)
         const card = document.querySelector('.bip-card');
         
-        // Efecto táctil para simular interacción móvil
         card.addEventListener('touchstart', function(e) {
             this.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1.02)';
         });
@@ -338,7 +345,6 @@
             this.style.transform = 'perspective(1000px) rotateX(5deg) rotateY(-5deg) scale(1)';
         });
         
-        // Efecto de movimiento con el mouse (para demo en desktop)
         card.addEventListener('mousemove', function(e) {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
