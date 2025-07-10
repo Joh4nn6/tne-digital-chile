@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - App Digital Chile</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: transparent;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 15px;
+            overflow-x: hidden;
+        }
+
+        .profile-container {
+            width: 100%;
+            max-width: 100%;
+            min-height: 85vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 25px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+            animation: slideUp 0.8s ease-out;
+            margin-top: 10px;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .profile-header {
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%);
+            padding: 40px 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .profile-name {
+            font-size: 26px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-email {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-menu {
+            padding: 30px 25px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            min-height: 50vh;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 22px 25px;
+            margin-bottom: 18px;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .menu-item:active {
+            transform: translateY(-1px);
+        }
+
+        .menu-item.logout {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+        }
+
+        .menu-item.logout:hover {
+            background: linear-gradient(135deg, #ff5252, #e53935);
+        }
+
+        .menu-icon {
+            width: 28px;
+            height: 28px;
+            margin-right: 18px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .menu-text {
+            flex: 1;
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .menu-item.logout .menu-text {
+            color: white;
+        }
+
+        .menu-arrow {
+            width: 20px;
+            height: 20px;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover .menu-arrow {
+            opacity: 1;
+            transform: translateX(5px);
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .menu-item:hover::before {
+            left: 100%;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            transform: scale(1.1);
+            background: white;
+        }
+
+        @media (max-width: 480px) {
+            .profile-container {
+                max-width: 100%;
+                margin: 5px;
+                min-height: 90vh;
+            }
+            
+            .profile-header {
+                padding: 35px 20px;
+            }
+            
+            .profile-menu {
+                padding: 25px 20px;
+                min-height: 55vh;
+            }
+            
+            .menu-item {
+                padding: 20px 22px;
+                margin-bottom: 16px;
+            }
+        }
+
+        /* Animaciones de entrada escalonadas */
+        .menu-item {
+            animation: slideInRight 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .menu-item:nth-child(1) { animation-delay: 0.1s; }
+        .menu-item:nth-child(2) { animation-delay: 0.2s; }
+        .menu-item:nth-child(3) { animation-delay: 0.3s; }
+        .menu-item:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Efecto de ripple en los botones */
+        .menu-item {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-button" onclick="goBack()">
+        ←
+    </button>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="profile-avatar" id="avatar">
+                👤
+            </div>
+            <div class="profile-name" id="userName">Usuario</div>
+            <div class="profile-email" id="userEmail">usuario@email.com</div>
+        </div>
+
+        <div class="profile-menu">
+            <div class="menu-item" onclick="editProfile()">
+                <div class="menu-icon">✏️</div>
+                <div class="menu-text">Editar Perfil</div>
+                <div class="menu-arrow">→</div>
+            </div>
+
+            <div class="menu-item" onclick="showSettings()">
+                <div class="menu-icon">⚙️</div>
+                <div class="menu-text">Configuración</div>
+                <div class="menu-arrow">→</div>
+            </div>
+
+            <div class="menu-item" onclick="showHelp()">
+                <div class="menu-icon">❓</div>
+                <div class="menu-text">Ayuda y Soporte</div>
+                <div class="menu-arrow">→</div>
+            </div>
+
+            <div class="menu-item logout" onclick="logout()">
+                <div class="menu-icon">🚪</div>
+                <div class="menu-text">Cerrar Sesión</div>
+                <div class="menu-arrow">→</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Obtener parámetros de la URL
+        function getURLParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                name: params.get('name') || 'Camila Rodríguez Fernández',
+                email: params.get('email') || 'camila.rodriguez@duocuc.cl',
+                avatar: params.get('avatar') || '👩‍🎓'
+            };
+        }
+
+        // Inicializar datos del usuario
+        function initUserData() {
+            const userData = getURLParams();
+            document.getElementById('userName').textContent = userData.name;
+            document.getElementById('userEmail').textContent = userData.email;
+            document.getElementById('avatar').textContent = userData.avatar;
+        }
+
+        // Efecto ripple en los botones
+        function createRipple(event) {
+            const button = event.currentTarget;
+            const ripple = document.createElement('span');
+            const rect = button.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = event.clientX - rect.left - size / 2;
+            const y = event.clientY - rect.top - size / 2;
+
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.classList.add('ripple');
+
+            button.appendChild(ripple);
+
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        }
+
+        // Agregar efecto ripple a todos los menu items
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', createRipple);
+        });
+
+        // Funciones de navegación
+        function goBack() {
+            // Animación de salida
+            document.querySelector('.profile-container').style.animation = 'slideDown 0.5s ease-in';
+            setTimeout(() => {
+                if (window.history.length > 1) {
+                    window.history.back();
+                } else {
+                    window.close();
+                }
+            }, 500);
+        }
+
+        function editProfile() {
+            // Aquí puedes redirigir a la página de edición de perfil
+            console.log('Editar perfil');
+            // window.location.href = 'edit-profile.html';
+        }
+
+        function showSettings() {
+            // Aquí puedes redirigir a la página de configuración
+            console.log('Configuración');
+            // window.location.href = 'settings.html';
+        }
+
+        function showHelp() {
+            // Aquí puedes redirigir a la página de ayuda
+            console.log('Ayuda y soporte');
+            // window.location.href = 'help.html';
+        }
+
+        function logout() {
+            // Confirmación de cierre de sesión con estilo
+            const confirmed = confirm('¿Estás seguro de que quieres cerrar sesión?');
+            if (confirmed) {
+                // Animación de salida
+                document.querySelector('.profile-container').style.animation = 'slideDown 0.5s ease-in';
+                setTimeout(() => {
+                    console.log('Cerrando sesión...');
+                    // Aquí puedes redirigir a la página de login
+                    // window.location.href = 'login.html';
+                }, 500);
+            }
+        }
+
+        // Animación de salida
+        const slideDownKeyframes = `
+            @keyframes slideDown {
+                from {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateY(50px);
+                }
+            }
+        `;
+
+        // Agregar la animación al head
+        const style = document.createElement('style');
+        style.textContent = slideDownKeyframes;
+        document.head.appendChild(style);
+
+        // Inicializar cuando se carga la página
+        document.addEventListener('DOMContentLoaded', initUserData);
+    </script>
+</body>
+</html>
