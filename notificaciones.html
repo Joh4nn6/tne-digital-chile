@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notificaciones - TNE Digital</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #00d4aa 0%, #00bfa5 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .notifications-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+
+        .notification-item {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .notification-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .notification-item.read {
+            opacity: 0.7;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .notification-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .notification-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .icon-payment {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+        }
+
+        .icon-transport {
+            background: linear-gradient(45deg, #2196F3, #1976D2);
+            color: white;
+        }
+
+        .icon-system {
+            background: linear-gradient(45deg, #FF9800, #F57C00);
+            color: white;
+        }
+
+        .icon-security {
+            background: linear-gradient(45deg, #F44336, #D32F2F);
+            color: white;
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-title {
+            color: white;
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .notification-message {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 13px;
+            line-height: 1.4;
+            margin-bottom: 6px;
+        }
+
+        .notification-time {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 12px;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 8px;
+            height: 8px;
+            background: #FF4444;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .notification-item.read .notification-badge {
+            display: none;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .no-notifications {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            padding: 40px 20px;
+            display: none;
+        }
+
+        .clear-all {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .clear-all:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+    <div class="notifications-container">
+        <div class="header">
+            <h1>🔔 Notificaciones</h1>
+            <p>Mantente al día con tu TNE Digital</p>
+        </div>
+
+        <div class="notifications-list">
+            <div class="notification-item" onclick="markAsRead(this)">
+                <div class="notification-badge"></div>
+                <div class="notification-header">
+                    <div class="notification-icon icon-payment">💳</div>
+                    <div class="notification-content">
+                        <div class="notification-title">Pago Exitoso</div>
+                        <div class="notification-message">Se ha cargado $5.000 a tu TNE Digital. Saldo actual: $12.500</div>
+                        <div class="notification-time">Hace 2 minutos</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="notification-item" onclick="markAsRead(this)">
+                <div class="notification-badge"></div>
+                <div class="notification-header">
+                    <div class="notification-icon icon-transport">🚌</div>
+                    <div class="notification-content">
+                        <div class="notification-title">Viaje Registrado</div>
+                        <div class="notification-message">Metro Línea 1 - Estación Universidad de Chile. Tarifa: $800</div>
+                        <div class="notification-time">Hace 1 hora</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="notification-item" onclick="markAsRead(this)">
+                <div class="notification-badge"></div>
+                <div class="notification-header">
+                    <div class="notification-icon icon-system">⚙️</div>
+                    <div class="notification-content">
+                        <div class="notification-title">Actualización Disponible</div>
+                        <div class="notification-message">Nueva versión de TNE Digital disponible con mejoras de seguridad</div>
+                        <div class="notification-time">Hace 3 horas</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="notification-item" onclick="markAsRead(this)">
+                <div class="notification-badge"></div>
+                <div class="notification-header">
+                    <div class="notification-icon icon-transport">🚍</div>
+                    <div class="notification-content">
+                        <div class="notification-title">Saldo Bajo</div>
+                        <div class="notification-message">Tu saldo está bajo ($7.500). Recarga tu TNE para seguir viajando</div>
+                        <div class="notification-time">Ayer</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="notification-item" onclick="markAsRead(this)">
+                <div class="notification-badge"></div>
+                <div class="notification-header">
+                    <div class="notification-icon icon-security">🔒</div>
+                    <div class="notification-content">
+                        <div class="notification-title">Inicio de Sesión</div>
+                        <div class="notification-message">Sesión iniciada desde nuevo dispositivo. Santiago, Chile</div>
+                        <div class="notification-time">Hace 2 días</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="no-notifications">
+            <p>📱 No tienes notificaciones nuevas</p>
+        </div>
+
+        <button class="clear-all" onclick="clearAllNotifications()">
+            🗑️ Limpiar Todas las Notificaciones
+        </button>
+    </div>
+
+    <script>
+        function markAsRead(element) {
+            element.classList.add('read');
+            element.style.animation = 'fadeOut 0.3s ease';
+            setTimeout(() => {
+                element.style.animation = '';
+            }, 300);
+        }
+
+        function clearAllNotifications() {
+            const notifications = document.querySelectorAll('.notification-item');
+            const notificationsList = document.querySelector('.notifications-list');
+            const noNotifications = document.querySelector('.no-notifications');
+            
+            notifications.forEach((notification, index) => {
+                setTimeout(() => {
+                    notification.style.animation = 'fadeOut 0.5s ease forwards';
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 500);
+                }, index * 100);
+            });
+
+            setTimeout(() => {
+                noNotifications.style.display = 'block';
+                noNotifications.style.animation = 'fadeIn 0.5s ease';
+            }, notifications.length * 100 + 500);
+        }
+
+        // Añadir animaciones CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeOut {
+                from { opacity: 1; transform: translateX(0); }
+                to { opacity: 0; transform: translateX(-100%); }
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
