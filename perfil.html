@@ -14,26 +14,23 @@
         body {    
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: transparent;
-            min-height: 100vh;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 15px;
-            overflow-x: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
         }
 
         .profile-container {
             width: 100%;
-            max-width: 100%;
-            min-height: 85vh;
+            height: 100vh;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 25px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
+            overflow-y: auto;
             position: relative;
             animation: slideUp 0.8s ease-out;
-            margin-top: 10px;
         }
 
         @keyframes slideUp {
@@ -49,7 +46,7 @@
 
         .profile-header {
             background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%);
-            padding: 40px 25px;
+            padding: 30px 25px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -72,15 +69,15 @@
         }
 
         .profile-avatar {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             background: linear-gradient(135deg, #ff6b6b, #feca57);
-            margin: 0 auto 20px;
+            margin: 0 auto 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 40px;
+            font-size: 35px;
             font-weight: bold;
             color: white;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
@@ -95,17 +92,17 @@
         }
 
         .profile-name {
-            font-size: 26px;
+            font-size: 22px;
             font-weight: 700;
             color: white;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             position: relative;
             z-index: 1;
         }
 
         .profile-email {
-            font-size: 16px;
+            font-size: 14px;
             color: rgba(255, 255, 255, 0.8);
             font-weight: 400;
             position: relative;
@@ -113,33 +110,37 @@
         }
 
         .profile-menu {
-            padding: 30px 25px;
+            padding: 20px 25px;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            min-height: 50vh;
+            flex: 1;
+            min-height: calc(100vh - 200px);
         }
 
         .menu-item {
             display: flex;
             align-items: center;
-            padding: 22px 25px;
-            margin-bottom: 18px;
+            padding: 18px 20px;
+            margin-bottom: 12px;
             background: white;
-            border-radius: 18px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            border: none;
+            width: 100%;
+            text-align: left;
         }
 
         .menu-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
         .menu-item:active {
-            transform: translateY(-1px);
+            transform: translateY(0px);
         }
 
         .menu-item.logout {
@@ -152,19 +153,19 @@
         }
 
         .menu-icon {
-            width: 28px;
-            height: 28px;
-            margin-right: 18px;
+            width: 24px;
+            height: 24px;
+            margin-right: 15px;
             flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 20px;
         }
 
         .menu-text {
             flex: 1;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
             color: #333;
         }
@@ -174,77 +175,16 @@
         }
 
         .menu-arrow {
-            width: 20px;
-            height: 20px;
+            width: 16px;
+            height: 16px;
             opacity: 0.6;
             transition: all 0.3s ease;
+            font-size: 16px;
         }
 
         .menu-item:hover .menu-arrow {
             opacity: 1;
-            transform: translateX(5px);
-        }
-
-        .menu-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .menu-item:hover::before {
-            left: 100%;
-        }
-
-        .back-button {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            width: 45px;
-            height: 45px;
-            background: rgba(255, 255, 255, 0.9);
-            border: none;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-
-        .back-button:hover {
-            transform: scale(1.1);
-            background: white;
-        }
-
-        @media (max-width: 480px) {
-            .profile-container {
-                max-width: 100%;
-                margin: 5px;
-                min-height: 90vh;
-            }
-            
-            .profile-header {
-                padding: 35px 20px;
-            }
-            
-            .profile-menu {
-                padding: 25px 20px;
-                min-height: 55vh;
-            }
-            
-            .menu-item {
-                padding: 20px 22px;
-                margin-bottom: 16px;
-            }
+            transform: translateX(3px);
         }
 
         /* Animaciones de entrada escalonadas */
@@ -261,7 +201,7 @@
         @keyframes slideInRight {
             from {
                 opacity: 0;
-                transform: translateX(50px);
+                transform: translateX(30px);
             }
             to {
                 opacity: 1;
@@ -270,11 +210,6 @@
         }
 
         /* Efecto de ripple en los botones */
-        .menu-item {
-            position: relative;
-            overflow: hidden;
-        }
-
         .ripple {
             position: absolute;
             border-radius: 50%;
@@ -290,46 +225,73 @@
                 opacity: 0;
             }
         }
+
+        /* Optimización para WebView */
+        html {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            -webkit-overflow-scrolling: touch;
+            -webkit-transform: translateZ(0);
+        }
+
+        .profile-container {
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Responsive para móviles */
+        @media (max-width: 480px) {
+            .profile-header {
+                padding: 25px 20px;
+            }
+            
+            .profile-menu {
+                padding: 15px 20px;
+            }
+            
+            .menu-item {
+                padding: 16px 18px;
+                margin-bottom: 10px;
+            }
+        }
     </style>
 </head>
 <body>
-    <button class="back-button" onclick="goBack()">
-        ←
-    </button>
-
     <div class="profile-container">
         <div class="profile-header">
             <div class="profile-avatar" id="avatar">
                 👤
             </div>
-            <div class="profile-name" id="userName">Usuario</div>
-            <div class="profile-email" id="userEmail">usuario@email.com</div>
+            <div class="profile-name" id="userName">Camila Rodríguez Fernández</div>
+            <div class="profile-email" id="userEmail">camila.rodriguez@duocuc.cl</div>
         </div>
 
         <div class="profile-menu">
-            <div class="menu-item" onclick="editProfile()">
+            <button class="menu-item" onclick="editProfile()">
                 <div class="menu-icon">✏️</div>
                 <div class="menu-text">Editar Perfil</div>
                 <div class="menu-arrow">→</div>
-            </div>
+            </button>
 
-            <div class="menu-item" onclick="showSettings()">
+            <button class="menu-item" onclick="showSettings()">
                 <div class="menu-icon">⚙️</div>
                 <div class="menu-text">Configuración</div>
                 <div class="menu-arrow">→</div>
-            </div>
+            </button>
 
-            <div class="menu-item" onclick="showHelp()">
+            <button class="menu-item" onclick="showHelp()">
                 <div class="menu-icon">❓</div>
                 <div class="menu-text">Ayuda y Soporte</div>
                 <div class="menu-arrow">→</div>
-            </div>
+            </button>
 
-            <div class="menu-item logout" onclick="logout()">
+            <button class="menu-item logout" onclick="logout()">
                 <div class="menu-icon">🚪</div>
                 <div class="menu-text">Cerrar Sesión</div>
                 <div class="menu-arrow">→</div>
-            </div>
+            </button>
         </div>
     </div>
 
@@ -379,71 +341,76 @@
         });
 
         // Funciones de navegación
-        function goBack() {
-            // Animación de salida
-            document.querySelector('.profile-container').style.animation = 'slideDown 0.5s ease-in';
-            setTimeout(() => {
-                if (window.history.length > 1) {
-                    window.history.back();
-                } else {
-                    window.close();
-                }
-            }, 500);
-        }
-
         function editProfile() {
-            // Aquí puedes redirigir a la página de edición de perfil
+            // Mostrar feedback visual
+            showMessage('Abriendo editor de perfil...');
+            // Aquí puedes comunicarte con Adalo
             console.log('Editar perfil');
-            // window.location.href = 'edit-profile.html';
         }
 
         function showSettings() {
-            // Aquí puedes redirigir a la página de configuración
+            showMessage('Abriendo configuración...');
             console.log('Configuración');
-            // window.location.href = 'settings.html';
         }
 
         function showHelp() {
-            // Aquí puedes redirigir a la página de ayuda
+            showMessage('Abriendo ayuda...');
             console.log('Ayuda y soporte');
-            // window.location.href = 'help.html';
         }
 
         function logout() {
-            // Confirmación de cierre de sesión con estilo
             const confirmed = confirm('¿Estás seguro de que quieres cerrar sesión?');
             if (confirmed) {
-                // Animación de salida
-                document.querySelector('.profile-container').style.animation = 'slideDown 0.5s ease-in';
+                showMessage('Cerrando sesión...');
                 setTimeout(() => {
                     console.log('Cerrando sesión...');
-                    // Aquí puedes redirigir a la página de login
-                    // window.location.href = 'login.html';
-                }, 500);
+                    // Aquí puedes comunicarte con Adalo
+                }, 1000);
             }
         }
 
-        // Animación de salida
-        const slideDownKeyframes = `
-            @keyframes slideDown {
-                from {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-                to {
-                    opacity: 0;
-                    transform: translateY(50px);
-                }
-            }
-        `;
+        function showMessage(message) {
+            // Crear mensaje temporal
+            const messageDiv = document.createElement('div');
+            messageDiv.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(0,0,0,0.8);
+                color: white;
+                padding: 12px 20px;
+                border-radius: 20px;
+                font-size: 14px;
+                z-index: 1000;
+                animation: fadeInOut 2s ease-in-out;
+            `;
+            messageDiv.textContent = message;
+            document.body.appendChild(messageDiv);
 
-        // Agregar la animación al head
-        const style = document.createElement('style');
-        style.textContent = slideDownKeyframes;
-        document.head.appendChild(style);
+            // Agregar animación
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeInOut {
+                    0%, 100% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+                    50% { opacity: 1; transform: translateX(-50%) translateY(0); }
+                }
+            `;
+            document.head.appendChild(style);
+
+            setTimeout(() => {
+                messageDiv.remove();
+                style.remove();
+            }, 2000);
+        }
 
         // Inicializar cuando se carga la página
         document.addEventListener('DOMContentLoaded', initUserData);
+
+        // Prevenir problemas de scroll en iframe
+        document.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
     </script>
 </body>
 </html>
