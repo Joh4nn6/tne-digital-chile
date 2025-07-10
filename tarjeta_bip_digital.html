@@ -3,364 +3,390 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tarjeta Bip! Digital Chile - Saldo</title>
+    <title>BIP! Digital Chile 2025</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        html, body {
-            width: 100%;
-            height: 100%;
-            background: transparent !important;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: transparent;
             min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
             padding: 20px;
         }
 
-        .container {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            background: transparent !important;
-        }
-
         .bip-card {
-            width: 450px;
-            height: 280px;
-            background: linear-gradient(135deg, #FF6F00 0%, #F57C00 30%, #FFB300 100%);
-            border-radius: 24px;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8f00 100%);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            max-width: 380px;
+            width: 100%;
+            color: white;
             position: relative;
             overflow: hidden;
-            box-shadow: 
-                0 25px 50px -12px rgba(255, 111, 0, 0.25),
-                0 0 0 1px rgba(255, 255, 255, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            transform: perspective(1000px) rotateX(5deg) rotateY(-5deg);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            animation: float 6s ease-in-out infinite;
+            transform: perspective(1000px) rotateX(2deg);
+            transition: all 0.3s ease;
         }
 
         .bip-card:hover {
-            transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1.05);
-            box-shadow: 
-                0 35px 70px -12px rgba(255, 111, 0, 0.4),
-                0 0 0 1px rgba(255, 255, 255, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            transform: perspective(1000px) rotateX(0deg) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
         }
 
-        @keyframes float {
-            0%, 100% { transform: perspective(1000px) rotateX(5deg) rotateY(-5deg) translateY(0px); }
-            50% { transform: perspective(1000px) rotateX(5deg) rotateY(-5deg) translateY(-10px); }
-        }
-
-        /* Glassmorphism overlay */
-        .glass-overlay {
+        .bip-card::before {
+            content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.1) 0%, 
-                rgba(255, 255, 255, 0.05) 50%, 
-                rgba(255, 255, 255, 0.1) 100%);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
         }
 
-        /* Animated background pattern */
-        .pattern-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 40% 60%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-            animation: patternMove 20s linear infinite;
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+            100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
         }
 
-        @keyframes patternMove {
-            0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.1); }
-            100% { transform: rotate(360deg) scale(1); }
-        }
-
-        /* Header Section */
-        .bip-header {
-            position: relative;
-            z-index: 10;
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 25px 15px;
-            background: linear-gradient(90deg, 
-                rgba(255, 255, 255, 0.95) 0%, 
-                rgba(255, 255, 255, 0.9) 100%);
-            border-radius: 24px 24px 0 0;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
         }
 
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .bip-logo {
+        .logo {
             font-size: 28px;
             font-weight: 900;
-            color: #FF6F00;
-            letter-spacing: -1px;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-            background: linear-gradient(135deg, #FF6F00 0%, #F57C00 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
-        .card-type {
-            font-size: 16px;
-            font-weight: 700;
-            color: #333;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
+        .logo .bip-text {
+            color: #fff;
         }
 
-        .tech-indicators {
-            display: flex;
-            gap: 8px;
-            align-items: center;
+        .logo .exclamation {
+            color: #fff200;
+            font-size: 32px;
         }
 
-        .nfc-indicator {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #0288D1 0%, #03A9F4 100%);
+        .digital-text {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            margin-left: 8px;
+        }
+
+        .nfc-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
             font-size: 12px;
             font-weight: bold;
-            animation: nfcPulse 2s infinite;
-            box-shadow: 0 0 0 0 rgba(2, 136, 209, 0.7);
+            letter-spacing: 1px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
         }
 
-        @keyframes nfcPulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(2, 136, 209, 0.7); }
-            50% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(2, 136, 209, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(2, 136, 209, 0); }
+        .nfc-icon:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .saldo-section {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .saldo-label {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            opacity: 0.95;
+        }
+
+        .saldo-amount {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 8px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+            line-height: 1;
+        }
+
+        .saldo-amount .currency {
+            font-size: 36px;
+            vertical-align: top;
+            margin-right: 4px;
+        }
+
+        .card-number {
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .card-number .dots {
+            opacity: 0.7;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .valid-date {
+            font-size: 12px;
+            opacity: 0.8;
+            letter-spacing: 0.5px;
         }
 
         .chip {
-            width: 32px;
-            height: 26px;
-            background: linear-gradient(135deg, #e0e0e0 0%, #bdbdbd 50%, #9e9e9e 100%);
+            width: 45px;
+            height: 35px;
+            background: linear-gradient(135deg, #ffd700, #ffed4a);
             border-radius: 6px;
-            position: relative;
-            box-shadow: 
-                inset 0 1px 2px rgba(255, 255, 255, 0.3),
-                0 3px 6px rgba(0, 0, 0, 0.2);
-            animation: chipGlow 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes chipGlow {
-            0% { box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3), 0 3px 6px rgba(0, 0, 0, 0.2); }
-            100% { box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3), 0 3px 6px rgba(0, 0, 0, 0.2), 0 0 20px rgba(224, 224, 224, 0.6); }
-        }
-
-        .chip::before {
-            content: '';
-            position: absolute;
-            top: 4px;
-            left: 4px;
-            right: 4px;
-            bottom: 4px;
-            background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
-            border-radius: 2px;
-        }
-
-        /* Content Section */
-        .bip-content {
-            position: relative;
-            z-index: 10;
-            padding: 20px 25px;
-            height: calc(100% - 60px);
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            gap: 15px;
+            justify-content: center;
+            font-size: 10px;
+            color: #333;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .chip:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .back-button {
+            position: absolute;
+            bottom: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            padding: 12px 24px;
             color: white;
-            text-align: center;
-        }
-
-        .balance-label {
-            font-size: 20px;
-            font-weight: 500;
-            opacity: 0.9;
-            letter-spacing: 1px;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-        }
-
-        .current-balance {
-            font-size: 60px;
-            font-weight: 900;
-            letter-spacing: -2px;
-            line-height: 1;
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .last-update {
             font-size: 14px;
-            font-weight: 400;
-            opacity: 0.8;
-            margin-top: 5px;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Scan effect */
-        .scan-line {
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                rgba(255, 111, 0, 0.8) 50%, 
-                transparent 100%);
-            animation: scanMove 4s ease-in-out infinite;
-        }
-
-        @keyframes scanMove {
-            0%, 100% { left: -100%; }
-            50% { left: 100%; }
-        }
-
-        /* Footer for card number */
-        .card-number {
-            position: absolute;
-            bottom: 20px;
-            left: 25px;
-            font-size: 18px;
             font-weight: 600;
-            color: rgba(255, 255, 255, 0.8);
-            letter-spacing: 2px;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-            z-index: 10;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateX(-50%) scale(1.05);
+        }
+
+        .back-button:active {
+            transform: translateX(-50%) scale(0.95);
+        }
+
+        /* Animaciones de entrada */
+        .bip-card {
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: perspective(1000px) rotateX(45deg) translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: perspective(1000px) rotateX(2deg) translateY(0);
+            }
+        }
+
+        .saldo-amount {
+            animation: countUp 1s ease-out 0.5s both;
+        }
+
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         /* Responsive Design */
-        @media (max-width: 500px) {
+        @media (max-width: 480px) {
             .bip-card {
-                width: 100%;
-                max-width: 400px;
-                height: 250px;
+                padding: 25px;
+                margin: 10px;
             }
             
-            .bip-logo {
+            .logo {
                 font-size: 24px;
             }
             
-            .current-balance {
-                font-size: 50px;
+            .saldo-amount {
+                font-size: 40px;
+            }
+            
+            .saldo-amount .currency {
+                font-size: 30px;
             }
         }
 
-        @media (orientation: landscape) and (max-height: 500px) {
-            .bip-card {
-                width: 500px;
-                height: 320px;
+        /* Efectos táctiles para móviles */
+        @media (hover: none) {
+            .bip-card:active {
+                transform: perspective(1000px) rotateX(0deg) scale(0.98);
             }
-            
-            .current-balance {
-                font-size: 70px;
-            }
-            
-            .bip-logo {
-                font-size: 32px;
-            }
+        }
+
+        /* Pulso en el saldo */
+        .saldo-amount {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="bip-card">
-            <div class="pattern-bg"></div>
-            <div class="glass-overlay"></div>
-            <div class="scan-line"></div>
-            
-            <div class="bip-header">
-                <div class="logo-section">
-                    <div class="bip-logo">bip!</div>
-                    <div class="card-type">Digital</div>
-                </div>
-                
-                <div class="tech-indicators">
-                    <div class="nfc-indicator">NFC</div>
-                    <div class="chip"></div>
-                </div>
+    <div class="bip-card">
+        <div class="header">
+            <div class="logo">
+                <span class="bip-text">bip</span><span class="exclamation">!</span>
+                <span class="digital-text">DIGITAL</span>
             </div>
-            
-            <div class="bip-content">
-                <div class="balance-label">Saldo Disponible</div>
-                <div class="current-balance">$20.000</div>
-                <div class="last-update">Actualizado: Julio 2025</div>
-            </div>
-
-            <div class="card-number">**** **** **** 1234</div>
+            <div class="nfc-icon">NFC</div>
         </div>
+        
+        <div class="saldo-section">
+            <div class="saldo-label">Saldo Disponible</div>
+            <div class="saldo-amount">
+                <span class="currency">$</span><span id="saldo">20.000</span>
+            </div>
+            <div class="card-number">
+                <span class="dots">•••• ••••</span> <span id="cardNumber">1234 5678</span>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="valid-date">
+                Válida hasta<br>
+                <strong id="validDate">12/2025</strong>
+            </div>
+            <div class="chip">
+                CHIP
+            </div>
+        </div>
+        
+        <button class="back-button" onclick="goBack()">
+            ← VOLVER
+        </button>
     </div>
 
     <script>
-        const card = document.querySelector('.bip-card');
-        
-        card.addEventListener('touchstart', function(e) {
-            this.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1.02)';
+        // Función para obtener parámetros de la URL
+        function getURLParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Función para formatear números con puntos
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        // Actualizar datos si se pasan por URL
+        document.addEventListener('DOMContentLoaded', function() {
+            const saldo = getURLParameter('saldo');
+            const cardNumber = getURLParameter('cardNumber');
+            const validDate = getURLParameter('validDate');
+
+            if (saldo) {
+                document.getElementById('saldo').textContent = formatNumber(saldo);
+            }
+            if (cardNumber) {
+                document.getElementById('cardNumber').textContent = cardNumber;
+            }
+            if (validDate) {
+                document.getElementById('validDate').textContent = validDate;
+            }
         });
-        
-        card.addEventListener('touchend', function(e) {
-            this.style.transform = 'perspective(1000px) rotateX(5deg) rotateY(-5deg) scale(1)';
+
+        // Función para el botón volver
+        function goBack() {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                // Si no hay historial, puedes redirigir a una página específica
+                window.location.href = 'about:blank';
+            }
+        }
+
+        // Efectos táctiles mejorados
+        document.querySelector('.bip-card').addEventListener('touchstart', function() {
+            this.style.transform = 'perspective(1000px) rotateX(0deg) scale(0.98)';
         });
-        
-        card.addEventListener('mousemove', function(e) {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = (y - centerY) / 10;
-            const rotateY = (centerX - x) / 10;
-            
-            this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+
+        document.querySelector('.bip-card').addEventListener('touchend', function() {
+            this.style.transform = 'perspective(1000px) rotateX(2deg) scale(1)';
         });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'perspective(1000px) rotateX(5deg) rotateY(-5deg) scale(1)';
+
+        // Animación del saldo al cargar
+        window.addEventListener('load', function() {
+            const saldoElement = document.getElementById('saldo');
+            const saldoValue = parseInt(saldoElement.textContent.replace(/\./g, ''));
+            
+            let currentValue = 0;
+            const increment = saldoValue / 50;
+            
+            const counter = setInterval(function() {
+                currentValue += increment;
+                if (currentValue >= saldoValue) {
+                    currentValue = saldoValue;
+                    clearInterval(counter);
+                }
+                saldoElement.textContent = formatNumber(Math.floor(currentValue));
+            }, 20);
         });
     </script>
 </body>
